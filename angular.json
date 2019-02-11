@@ -1,0 +1,142 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ng-routes": {
+      "root": "projects/ng-routes",
+      "sourceRoot": "projects/ng-routes/src",
+      "projectType": "library",
+      "prefix": "routes",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-routes/tsconfig.lib.json",
+            "project": "projects/ng-routes/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-routes/src/test.ts",
+            "tsConfig": "projects/ng-routes/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-routes/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-routes/tsconfig.lib.json",
+              "projects/ng-routes/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ng-routes-demo": {
+      "root": "projects/ng-routes-demo/",
+      "sourceRoot": "projects/ng-routes-demo/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ng-routes-demo",
+            "index": "projects/ng-routes-demo/src/index.html",
+            "main": "projects/ng-routes-demo/src/main.ts",
+            "polyfills": "projects/ng-routes-demo/src/polyfills.ts",
+            "tsConfig": "projects/ng-routes-demo/tsconfig.app.json",
+            "assets": [
+              "projects/ng-routes-demo/src/favicon.ico",
+              "projects/ng-routes-demo/src/assets"
+            ],
+            "styles": [
+              "projects/ng-routes-demo/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ng-routes-demo/src/environments/environment.ts",
+                  "with": "projects/ng-routes-demo/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ng-routes-demo:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ng-routes-demo:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ng-routes-demo:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-routes-demo/src/test.ts",
+            "polyfills": "projects/ng-routes-demo/src/polyfills.ts",
+            "tsConfig": "projects/ng-routes-demo/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-routes-demo/karma.conf.js",
+            "styles": [
+              "projects/ng-routes-demo/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/ng-routes-demo/src/favicon.ico",
+              "projects/ng-routes-demo/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-routes-demo/tsconfig.app.json",
+              "projects/ng-routes-demo/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "ng-routes"
+}

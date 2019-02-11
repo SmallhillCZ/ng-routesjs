@@ -1,0 +1,8 @@
+{
+  "_root": "/api",
+  "_links": {
+    "test": {
+      "href": "/test-resource.json"
+    }
+  }
+}
